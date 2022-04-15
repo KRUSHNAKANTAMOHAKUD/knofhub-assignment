@@ -1,8 +1,14 @@
 import React from "react";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
+import { getEventData } from "../../redux/thunk";
+import { useDispatch } from "react-redux";
 import "./SearchEvent.css";
 
 const SearchEvent = () => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getEventData());
+  }, []);
   return (
     <div className="container">
       <div className="event-details">

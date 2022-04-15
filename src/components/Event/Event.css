@@ -1,0 +1,15 @@
+.container-event {
+  position: relative;
+  margin-top: 112px;
+}
+
+.events-flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 32px;
+}
+
+.event-item {
+  width: 200px;
+  margin: 16px 32px;
+}

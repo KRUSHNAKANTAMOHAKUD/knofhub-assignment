@@ -60,13 +60,21 @@
 
 .input-field {
   border-radius: 8px;
-  width: 14rem;
+  width: 18rem;
+  height: 2.5rem;
+  position: relative;
 }
 
 .search-icon {
-  border-radius: 8px;
+  border-radius: 50%;
   background-color: #572148;
-  padding: 8px;
+  padding: 4px;
+  position: absolute;
+  right: 182px;
+  top: 56px;
+  height: 33px;
+  width: 32px;
+  cursor: pointer;
 }
 
 .search-icon > svg {

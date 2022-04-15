@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import { getEventData } from "../../redux/thunk";
 import { useDispatch } from "react-redux";
@@ -6,9 +6,37 @@ import "./SearchEvent.css";
 
 const SearchEvent = () => {
   const dispatch = useDispatch();
-  React.useEffect(() => {
-    dispatch(getEventData());
-  }, []);
+  // const [inputValue, setInputValue] = useState("");
+  const [params, setParams] = useState({
+    limit: 12,
+    offset: 0,
+    inputValue: "",
+    eventType: false,
+  });
+  useEffect(() => {
+    dispatch(
+      getEventData(
+        params.limit,
+        params.offset,
+        params.inputValue,
+        params.eventType
+      )
+    );
+  }, [params.eventType]);
+  const handleSearch = (event) => {
+    dispatch(
+      getEventData(
+        params.limit,
+        params.offset,
+        params.inputValue,
+        params.eventType
+      )
+    );
+  };
+  const handleEventType = (event) => {
+    setParams({ ...params, eventType: event.target.value });
+  };
+
   return (
     <div className="container">
       <div className="event-details">
@@ -36,11 +64,18 @@ const SearchEvent = () => {
           <div className="flex-row">
             <input
               type="text"
-              placeholder="Search.."
+              // placeholder="Search.."
               name="search"
               className="input-field"
+              onChange={(e) =>
+                setParams({ ...params, inputValue: e.target.value })
+              }
             />
-            <button type="submit" className="search-icon">
+            <button
+              type="submit"
+              className="search-icon"
+              onClick={handleSearch}
+            >
               <SearchIcon />
             </button>
           </div>
@@ -49,7 +84,7 @@ const SearchEvent = () => {
           <label id="search">
             <b>Past Events</b>
           </label>
-          <select className="select">
+          <select className="select" onChange={handleEventType}>
             <option>Select Type:</option>
             <option value="true">True</option>
             <option value="false">False</option>
